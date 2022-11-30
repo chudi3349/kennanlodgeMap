@@ -1,0 +1,208 @@
+<style>
+	.body{
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.card{
+		width: auto;
+		position: relative;
+		padding: 20px;
+	}
+	
+	.card:hover {
+	  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	}
+	.cardText{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		margin-top: -200px;
+		padding: 10px;
+		text-shadow: 2px 2px 4px #000000;
+		font-size: large;
+		font-weight: bold;
+	}
+	.myBackground{
+		filter: brightness(50%);
+		width: 100%;
+		height: 200px;
+		padding: 2px 16px;
+		border-radius: 10%;
+		display: flex;
+		position: relative;
+	} 
+
+	.modal {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		margin-left: 25%;
+		margin-right: auto;
+		gap: 0.4rem;
+		width: 450px;
+		padding: 1.3rem;
+		min-height: 250px;
+		position: absolute;
+		top: 20%;
+		background-color: white;
+		border: 1px solid #ddd;
+		border-radius: 15px;
+	}
+	.modal .flex {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	
+	button {
+		cursor: pointer;
+		border: none;
+	}
+	
+	.btn {
+		display: inline-block;
+		padding: 0.8rem 1.4rem;
+		background-color: #adcce9;
+		border: none;
+		border-radius: 10%;
+		text-align: center;
+	}
+	
+	.btn-close {
+		transform: translate(10px, -20px);
+		padding: 0.5rem 0.7rem;
+		background: #eee;
+		border-radius: 50%;
+	}
+	
+	.overlay {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		backdrop-filter: blur(3px);
+		z-index: 1;
+	}
+	
+	.modal {
+		z-index: 3;
+	}
+	
+	.hidden {
+		display: none;
+	}
+	
+	.mainText {
+		padding: 10px;
+	  	background-color: #c59d5f;
+		color: white;
+		text-align: center;
+		font-size: 20px;
+		margin-top: 20px;
+	  	position: relative;
+	  	animation-name: example;
+	  	animation-duration: 4s;
+	  	animation-direction: reverse;  
+	}
+
+	@keyframes example {
+	  0%   {background-color:#9d8155; left:0px; top:0px;}
+	  25%  {background-color:#4d4f4c; left:200px; top:0px;}
+	  50%  {background-color:#13172b; left:200px; top:200px;}
+	  75%  {background-color:#021f59; left:0px; top:200px;}
+	  100% {background-color:#478ac9; left:0px; top:0px;}
+	}
+	
+	@media only screen and (max-width: 1199px){
+		.mainText{
+			margin-top: 100px;
+		}
+	}
+</style>
+
+<div class="mainText">
+	<p>With 28 well appointed rooms guests can choose from the following categories of Rooms.</p>
+</div>
+
+    
+<div class="body">
+	<div class="allroom">
+		<div class="gridbody"></div>
+	</div>
+	<script>
+		let rooms = [{ name: "Kennan Standard", price: "N12000", roomlist: ["303", "  306", "  309"], bgImage: "url('https://kennan-lodge.com/wp-content/uploads/accomodation%20images/Luxury%20Standard.jpeg')" },
+					 { name: "Luxury Standard", price: "14000", roomlist: ["209", " 305", " 310", " 311", " 312"], bgImage: "url('https://kennan-lodge.com/wp-content/uploads/accomodation%20images/Kennan%20Standard.jpeg')" },
+					 { name: "Superior Deluxe", price: "16000", roomlist: ["202", " 204", " 205", " 206", " 208", " 210", " 211", " 212", " 302", " 308"], bgImage: "url('https://kennan-lodge.com/wp-content/uploads/accomodation%20images/Superior%20Deluxe.jpeg')" },
+					 { name: "Superior Deluxe <small>(Non-Ambulanat)</small>", price: "16000", roomlist: ["101", " 102"], bgImage: "url('https://kennan-lodge.com/wp-content/uploads/accomodation%20images/Luxury%20Standard.jpeg')" },
+					 { name: "Executive Twin", price: "18000", roomlist: ["201", " 203", " 301", " 313"], bgImage: "url('https://kennan-lodge.com/wp-content/uploads/accomodation%20images/Executive%20.jpeg')" },
+					 { name: "Executive Suite", price: "N30000", roomlist: ["207", " 307"], bgImage: "url('https://kennan-lodge.com/wp-content/uploads/accomodation%20images/Executive%20Suit.jpeg')" }
+					];
+		function myRoomsCat(rooms){
+			for (let i = 0; i < rooms.length; i++){
+				let allRoom = document.write(`    
+				<section class="hidden modal" style="">
+					<div class="flex">
+						<button class="btn-close">X</button>
+					</div>
+					<div style="color:black">
+						<h3 class="Categories"></h3>
+					<ul>
+						<li class="room"><a class="room"></a></li>
+						<br>
+					</ul> 
+					</div>
+					<button class="btn">Book now</button>
+				</section>
+				<div class="hidden overlay" style=""></div>
+				<div class="card">
+					<div class="myBackground"></div>
+					<div class= "cardText" style="color:#478ac9">
+						<h3 class="Categories2"></h3>
+						<p class="amount">Naira Ammount</p>
+						<button class="btn btn-open">View</button>
+					</div>
+				</div>
+			`)
+				let RoomCAt = document.querySelectorAll(".Categories");
+				RoomCAt[i].innerHTML = rooms[i].name;
+				let RoomCat2 = document.querySelectorAll(".Categories2");
+				RoomCat2[i].innerHTML = rooms[i].name;
+				let amount = document.querySelectorAll(".amount");
+				amount[i].innerHTML = rooms[i].price;
+				let roomList = document.querySelectorAll(".room");
+				roomList[i].innerHTML = rooms[i].roomlist;
+				let bgImage = document.querySelectorAll(".myBackground");
+				bgImage[i].style.backgroundImage = rooms[i].bgImage;
+			}
+		};
+		myRoomsCat(rooms);
+        
+		for (let i = 0; i < rooms.length; i++){
+			const modal = document.querySelectorAll(".modal");
+			const overlay = document.querySelectorAll(".overlay");
+			const openModalBtn = document.querySelectorAll(".btn-open");
+			const closeModalBtn = document.querySelectorAll(".btn-close");
+			const openModal = function () {
+				modal[i].classList.remove("hidden");
+				overlay[i].classList.remove("hidden");
+			};
+			openModalBtn[i].addEventListener("click", openModal);
+			const closeModal = function () {
+				modal[i].classList.add("hidden");
+				overlay[i].classList.add("hidden");
+			};
+			closeModalBtn[i].addEventListener("click", closeModal);
+			overlay[i].addEventListener("click", closeModal);
+			document.addEventListener("keydown", function (e) {
+				if (e.key === "Escape" && !modal.classList.contains("hidden")) {
+					modalClose();
+				}
+			});
+		}       
+		let kennanAccomodations = document.querySelector(".allroom");
+	</script>
+</div>
